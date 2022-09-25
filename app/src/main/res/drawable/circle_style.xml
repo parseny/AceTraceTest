@@ -1,0 +1,10 @@
+<!--балы попытка сделать квадрат отображения цвета круглым, но тогда при изменении цвета он переставал быть круглым тк
+больше был background не @drawable/circle-style-->
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <shape android:shape="oval">
+            <solid android:color="#000000"/>
+        </shape>
+    </item>
+</selector>
