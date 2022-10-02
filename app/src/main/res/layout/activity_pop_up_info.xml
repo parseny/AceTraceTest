@@ -17,25 +17,34 @@
 
             <Button
                 android:id="@+id/choosecolor"
-                android:layout_width="150dp"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:text="@string/choose_color"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/twogradient"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.26999998" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/choosegradient"
+                android:id="@+id/threegradient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/choose_gradient"
+                android:text="Choose 3-color gradient"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/choosecolor"
-                app:layout_constraintVertical_bias="0.36" />
+                app:layout_constraintTop_toBottomOf="@+id/twogradient" />
+
+            <Button
+                android:id="@+id/twogradient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose 2-color gradient"
+                app:layout_constraintBottom_toTopOf="@+id/threegradient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/choosecolor" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

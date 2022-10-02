@@ -30,21 +30,27 @@ class ColorPickerActivity : AppCompatActivity() {
             dialog.setContentView(R.layout.activity_pop_up_info)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             val chooseColorBtn = dialog.findViewById<Button>(R.id.choosecolor)
-            val chooseGradientBtn = dialog.findViewById<Button>(R.id.choosegradient)
+            val chooseTwoGradientBtn = dialog.findViewById<Button>(R.id.twogradient)
+            val chooseThreeGradientBtn = dialog.findViewById<Button>(R.id.threegradient)
             chooseColorBtn.setOnClickListener {
                 //Toast.makeText(this, "Color", Toast.LENGTH_SHORT).show()
                 pickColor(colorShowButton, "color")
 
             }
-            chooseGradientBtn.setOnClickListener {
+            chooseTwoGradientBtn.setOnClickListener {
 //                Toast.makeText(this, "Gradient", Toast.LENGTH_SHORT).show()
-                pickColor(colorShowButton, "gradient")
+                Log.d("2colorbtn", "clicked")
+                pickColor(colorShowButton, "gradient", 2)
+            }
+            chooseThreeGradientBtn.setOnClickListener {
+                Log.d("3colorbtn", "clicked")
+                pickColor(colorShowButton, "gradient", 3)
             }
             dialog.show()
         }
     }
 
-    private fun pickColor(btn: Button, flag: String) {
+    private fun pickColor(btn: Button, flag: String, numberOfColors: Int = 0) {
         when (flag) {
             "color" -> {
                 val colorPicker = ColorPickerDialog(
@@ -86,14 +92,51 @@ class ColorPickerActivity : AppCompatActivity() {
                                         dialog1: ColorPickerDialog?,
                                         colorPicker1: Int
                                     ) {
-                                        val gd = GradientDrawable(
-                                            GradientDrawable.Orientation.LEFT_RIGHT,
-                                            intArrayOf(colorPicker, colorPicker1)
-                                        );
-                                        gd.cornerRadius = 10f;
-                                        btn.background = gd
+                                        if (numberOfColors == 2) {
+                                            Log.d(
+                                                "2 gradient colors",
+                                                "$colorPicker $colorPicker1"
+                                            )
+                                            val gradient = GradientDrawable(
+                                                GradientDrawable.Orientation.LEFT_RIGHT,
+                                                intArrayOf(colorPicker, colorPicker1)
+                                            );
+                                            Log.d("got 3gradient", gradient.toString())
+                                            gradient.cornerRadius = 10f;
+                                            btn.background = gradient
+                                        } else {
+                                            val colorPicker2 = ColorPickerDialog(
+                                                this@ColorPickerActivity,
+                                                Color.BLACK,
+                                                true,
+                                                object : ColorPickerDialog.OnColorPickerListener {
+                                                    override fun onCancel(dialog: ColorPickerDialog?) {
+                                                        // handle click button Cancel
+                                                    }
 
-                                       Log.d("-----", colorPicker.toString() + " " + colorPicker1.toString())
+                                                    override fun onOk(
+                                                        dialog2: ColorPickerDialog?,
+                                                        colorPicker2: Int
+                                                    ) {
+                                                        Log.d(
+                                                            "3 gradient colors",
+                                                            "$colorPicker $colorPicker1 $colorPicker2"
+                                                        )
+                                                        val gradient = GradientDrawable(
+                                                            GradientDrawable.Orientation.LEFT_RIGHT,
+                                                            intArrayOf(
+                                                                colorPicker,
+                                                                colorPicker1,
+                                                                colorPicker2
+                                                            )
+                                                        );
+                                                        Log.d("got 3gradient", gradient.toString())
+                                                        gradient.cornerRadius = 10f;
+                                                        btn.background = gradient
+                                                    }
+                                                })
+                                            colorPicker2.show()
+                                        }
                                     }
                                 })
                             colorPicker1.show()
